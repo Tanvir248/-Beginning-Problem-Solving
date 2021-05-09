@@ -1,0 +1,80 @@
+#include <vector>
+#include<string>
+#include <iostream>
+#include<algorithm>
+using namespace std;
+
+class Node
+{
+public:
+    int data;
+    Node* next;
+};
+
+void removedouble(Node* head)
+{
+    Node* none;
+    if (head == NULL)
+        return;
+    if (head->next != NULL)
+    {
+        if (head->data == head->next->data)
+        {
+            none = head->next;
+            head->next = head->next->next;
+            free(none);
+            removedouble(head);
+        }
+        else
+        {
+            removedouble(head->next);
+        }
+    }
+}
+
+void pushdata(Node** head, int newdata)
+{
+Node* newnode = new Node();
+newnode->data = newdata;
+    newnode->next = (*head);  //If you want unsorted data just stop or remove this part...
+    (*head) = newnode;
+}
+
+void printdata(Node *node)
+{
+    while (node!=NULL)
+    {
+        cout<<" "<<node->data;
+        node = node->next;
+    }
+}
+
+
+int main()
+{
+
+    Node *head = NULL;
+    push(&head, 29);
+    push(&head, 21);
+    push(&head, 21);
+    push(&head, 11);
+    push(&head, 10);
+    push(&head, 7);
+    push(&head, 3);
+    push(&head, 2);
+    push(&head, 1);
+    push(&head, 3);
+    cout<<"list before duplicate remove: ";
+    printdata(head);
+
+    removedouble(head);
+    
+    cout<<"\n list after duplicate removal ";
+    printdata(head);
+    
+    return 0;
+}
+
+/* Tanvir Rahman
+Id: 18192103248
+intake: 41/06.  */

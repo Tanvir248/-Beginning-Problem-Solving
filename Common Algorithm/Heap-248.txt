@@ -1,0 +1,35 @@
+#include <iostream>
+#include <vector>
+#include <utility>
+#include <algorithm>
+
+using namespace std;
+
+struct myComp {
+    
+    bool operator() (const pair<int, char>& lhs, const pair<int, char>& rhs) {
+        return lhs.first > rhs.first;
+    }
+};
+
+int main() {
+    vector< pair<int, char> > Q;
+    Q.push_back( pair<int, char>(10, 'c') );
+    Q.push_back( pair<int, char>(123, 'a') );
+    Q.push_back( pair<int, char>(2, 'd') );
+    Q.push_back( pair<int, char>(9, 'f') );
+    Q.push_back( pair<int, char>(81, 'b') );
+    Q.push_back( pair<int, char>(4, 'e') );
+    
+    make_heap(Q.begin(), Q.end(), myComp());
+    
+    pop_heap(Q.begin(), Q.end());
+    
+    cout << Q.back().first << ", " << Q.back().second << endl;
+    Q.pop_back();
+    return 0;
+    
+}
+/* Tanvir Rahman
+Id: 18192103248
+intake: 41/06.  */
